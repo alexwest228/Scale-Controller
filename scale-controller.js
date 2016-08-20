@@ -321,6 +321,15 @@
 			});
 		};
 		
+		Object.defineProperty(window, 'scale', {
+			"get": function () {
+				return calcScale().scale;
+			},
+			"set": function (value) {},
+			"configurable": false,
+			"enumerable": true,
+		});
+		
 		addEvent(window, 'resize', handler);
 		handler();
 	});
