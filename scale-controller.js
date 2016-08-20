@@ -298,23 +298,31 @@
 		});
 		
 		var calcScale = function () {
-			var ds = getSize(window);
-			//var ds = [$(window).width(),$(window).height()];
+			var ws = getSize(window);
 			
-			var widthScale	= ds[0] / size[0],
-				heightScale = ds[1] / size[1];
+			var widthScale	= ws[0] / size[0],
+				heightScale = ws[1] / size[1];
 			
 			var scale = (heightScale > widthScale) ? widthScale : heightScale,
-				offset = ds[0] - (size[0] * scale);
+				offset = ws[0] - (size[0] * scale);
+			
+			return {
+				"scale": scale,
+				"offset": offset
+			}
+		};
+		
+		var handler = function () {
+			var scale = calcScale();
 			
 			setStyle(element, {
-				"transform": 'scale('+scale+','+scale+')',
-				"margin-left": (offset > 0) ? (offset / 2) : 0
+				"transform": 'scale('+scale.scale+','+scale.scale+')',
+				"margin-left": (scale.offset > 0) ? (scale.offset / 2) : 0
 			});
 		};
-			
-		calcScale();
-		addEvent(window,'resize', calcScale);
+		
+		addEvent(window, 'resize', handler);
+		handler();
 	});
 	
 })();
