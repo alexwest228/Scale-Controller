@@ -7,7 +7,7 @@
 	var re = /^([0-9]+)x([0-9]+)$/;
 	
 	$(function(){
-		var element	= $('[data-scale]')[0],
+		var element	= $('[data-scale]').eq(0),
 			strict	= element.attr('data-scale').match(re) || false,
 			size	= [element.width(),element.height()];
 		
